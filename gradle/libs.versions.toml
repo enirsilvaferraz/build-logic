@@ -1,0 +1,155 @@
+[versions]
+
+android-compileSdk = "36"
+android-minSdk = "30"
+android-targetSdk = "36"
+
+agp = "8.13.0"
+androidx-activity = "1.11.0"
+androidx-lifecycle = "2.9.3"
+coil = "3.3.0"
+cmp = "1.8.2"
+coroutines = "1.10.2"
+kermit = "2.0.8"
+koin-bom = "4.1.1"
+koin-annotations = "2.2.0-RC1"
+kotlin = "2.2.20"
+kotlinx-serialization = "1.9.0"
+ksp = "2.2.20-2.0.2"
+ktor = "3.3.0"
+navigation-compose = "2.9.0-rc02"
+paging = "3.3.0-alpha02-0.5.1"
+room = "2.8.0"
+sqlite = "2.6.0"
+
+[libraries]
+
+# Kotlin
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
+kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
+kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
+
+# Android
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity" }
+androidx-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-runtimeCompose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
+androidx-navigation-compose = { group = "org.jetbrains.androidx.navigation", name = "navigation-compose", version.ref = "navigation-compose" }
+
+# Koin
+koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin-bom" }
+koin-core = { group = "io.insert-koin", name = "koin-core" }
+koin-compose = { group = "io.insert-koin", name = "koin-compose" }
+koin-compose-viewmodel = { group = "io.insert-koin", name = "koin-compose-viewmodel" }
+koin-compose-viewmodel-navigation = { group = "io.insert-koin", name = "koin-compose-viewmodel-navigation" }
+koin-test = { group = "io.insert-koin", name = "koin-test" }
+koin-test-junit4 = { group = "io.insert-koin", name = "koin-test-junit4" }
+
+# Koin Annotations
+koin-annotations-bom = { group = "io.insert-koin", name = "koin-annotations-bom", version.ref = "koin-annotations" }
+koin-annotations = { group = "io.insert-koin", name = "koin-annotations", version.ref = "koin-annotations" }
+koin-ksp-compiler = { group = "io.insert-koin", name = "koin-ksp-compiler", version.ref = "koin-annotations" }
+
+# Coil
+coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
+coil-network-ktor3 = { group = "io.coil-kt.coil3", name = "coil-network-ktor3", version.ref = "coil" }
+
+# Ktor
+ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktor" }
+ktor-client-encoding = { group = "io.ktor", name = "ktor-client-encoding", version.ref = "ktor" }
+ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+
+# Paging
+paging-common = { group = "app.cash.paging", name = "paging-common", version.ref = "paging" }
+paging-compose-common = { group = "app.cash.paging", name = "paging-compose-common", version.ref = "paging" }
+
+# Room
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-sqlite-bundled = { group = "androidx.sqlite", name = "sqlite-bundled", version.ref = "sqlite" }
+
+# Logging
+kermit = { group = "co.touchlab", name = "kermit", version.ref = "kermit" }
+
+# Dependencies of the included build-logic
+gradle-plugin-android = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+gradle-plugin-compose = { group = "org.jetbrains.compose", name = "org.jetbrains.compose.gradle.plugin", version.ref = "cmp" }
+gradle-plugin-kotlin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+gradle-plugin-room = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "room" }
+
+[bundles]
+
+# Ktor
+ktor-common = [
+    "kotlinx-coroutines",
+    "ktor-client-core",
+    "ktor-client-encoding",
+    "ktor-client-logging",
+    "ktor-serialization-kotlinx-json",
+    "ktor-client-content-negotiation",
+    "kermit"
+]
+ktor-android = [
+    "ktor-client-okhttp"
+]
+ktor-ios = [
+    "ktor-client-darwin"
+]
+
+# Koin
+koin-common = [
+    "koin-core",
+    "koin-annotations",
+]
+koin-common-compose = [
+    "koin-compose",
+    "koin-compose-viewmodel",
+    "koin-compose-viewmodel-navigation"
+]
+koin-common-compiler = [
+    "koin-ksp-compiler"
+]
+koin-common-test = [
+    "koin-test"
+]
+
+# Room
+room-common = [
+    "room-runtime",
+    "room-sqlite-bundled"
+]
+room-common-compiler = [
+    "room-compiler"
+]
+
+# Navigation
+navigation-common = [
+    "androidx-navigation-compose",
+    "kotlinx-serialization"
+]
+
+[plugins]
+
+android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+android-lint = { id = "com.android.lint", version.ref = "agp" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "cmp" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+room = { id = "androidx.room", version.ref = "room" }
+
+# Internal Plugins
+foundation-kmp-library = { id = "foundation.kmp.library" }
+foundation-kmp-application = { id = "foundation.kmp.application" }
+foundation-compose = { id = "foundation.compose" }
+foundation-navigation = { id = "foundation.navigation" }
+foundation-koin = { id = "foundation.koin" }
+foundation-ktor = { id = "foundation.ktor" }
+foundation-room = { id = "foundation.room" }
