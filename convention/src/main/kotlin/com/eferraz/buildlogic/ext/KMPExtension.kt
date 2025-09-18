@@ -1,4 +1,4 @@
-package com.eferraz.buildlogic
+package com.eferraz.buildlogic.ext
 
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension

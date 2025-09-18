@@ -1,10 +1,10 @@
 import com.eferraz.buildlogic.AbstractKmpProjectPlugin
 import com.eferraz.buildlogic.CatalogDefinitions.Plugins.ANDROID_APPLICATION
-import com.eferraz.buildlogic.configureAndroidTarget
-import com.eferraz.buildlogic.configureDesktopTarget
-import com.eferraz.buildlogic.configureIOSTarget
-import com.eferraz.buildlogic.libs
-import com.eferraz.buildlogic.plugin
+import com.eferraz.buildlogic.ext.configureAndroidTarget
+import com.eferraz.buildlogic.ext.configureDesktopTarget
+import com.eferraz.buildlogic.ext.configureIOSTarget
+import com.eferraz.buildlogic.ext.libs
+import com.eferraz.buildlogic.ext.plugin
 import org.gradle.api.Project
 import org.gradle.internal.extensions.stdlib.capitalized
 import org.gradle.kotlin.dsl.apply

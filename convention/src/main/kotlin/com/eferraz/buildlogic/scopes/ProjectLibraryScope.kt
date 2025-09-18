@@ -1,8 +1,10 @@
-package com.eferraz.buildlogic
+package com.eferraz.buildlogic.scopes
 
 import com.android.build.api.dsl.LibraryExtension
 import com.eferraz.buildlogic.CatalogDefinitions.Versions.COMPILE_SDK
 import com.eferraz.buildlogic.CatalogDefinitions.Versions.MIN_SDK
+import com.eferraz.buildlogic.ext.libs
+import com.eferraz.buildlogic.ext.version
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -11,7 +13,7 @@ object ProjectLibraryScope {
     var namespace: String? = null
 }
 
-internal fun Project.configureLibrary(namespaceParam: String) {
+private fun Project.configureLibrary(namespaceParam: String) {
 
     extensions.configure<LibraryExtension> {
 
@@ -29,7 +31,7 @@ internal fun Project.configureLibrary(namespaceParam: String) {
     }
 }
 
-fun Project.androidLibrary(scope: ProjectLibraryScope.() -> Unit) {
+fun Project.library(scope: ProjectLibraryScope.() -> Unit) {
 
     with(ProjectLibraryScope) { scope() }
 

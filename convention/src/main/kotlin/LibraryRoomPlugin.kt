@@ -3,9 +3,9 @@ import com.eferraz.buildlogic.CatalogDefinitions.Bundles.ROOM_COMMON
 import com.eferraz.buildlogic.CatalogDefinitions.Bundles.ROOM_COMMON_COMPILER
 import com.eferraz.buildlogic.CatalogDefinitions.Plugins.KSP
 import com.eferraz.buildlogic.CatalogDefinitions.Plugins.ROOM
-import com.eferraz.buildlogic.bundle
-import com.eferraz.buildlogic.libs
-import com.eferraz.buildlogic.plugin
+import com.eferraz.buildlogic.ext.bundle
+import com.eferraz.buildlogic.ext.libs
+import com.eferraz.buildlogic.ext.plugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply

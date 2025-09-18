@@ -1,9 +1,9 @@
 import com.eferraz.buildlogic.CatalogDefinitions.Libraries.ACTIVITY_COMPOSE
 import com.eferraz.buildlogic.CatalogDefinitions.Plugins.COMPOSE_COMPILER
 import com.eferraz.buildlogic.CatalogDefinitions.Plugins.COMPOSE_MULTIPLATFORM
-import com.eferraz.buildlogic.library
-import com.eferraz.buildlogic.libs
-import com.eferraz.buildlogic.plugin
+import com.eferraz.buildlogic.ext.library
+import com.eferraz.buildlogic.ext.libs
+import com.eferraz.buildlogic.ext.plugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply

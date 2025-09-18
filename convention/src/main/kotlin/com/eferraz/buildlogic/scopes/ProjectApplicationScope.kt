@@ -1,12 +1,17 @@
-package com.eferraz.buildlogic
+package com.eferraz.buildlogic.scopes
 
 import com.android.build.api.dsl.ApplicationExtension
 import com.eferraz.buildlogic.CatalogDefinitions.Versions.COMPILE_SDK
 import com.eferraz.buildlogic.CatalogDefinitions.Versions.MIN_SDK
 import com.eferraz.buildlogic.CatalogDefinitions.Versions.TARGET_SDK
+import com.eferraz.buildlogic.ext.libs
+import com.eferraz.buildlogic.ext.version
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
+import org.jetbrains.compose.ComposeExtension
+import org.jetbrains.compose.desktop.DesktopExtension
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 object ProjectApplicationScope {
     var namespace: String? = null
@@ -14,7 +19,7 @@ object ProjectApplicationScope {
     var versionCode: Int? = null
 }
 
-internal fun Project.configureApplication(
+private fun Project.configureApplication(
     namespaceParam: String,
     versionNameParam: String,
     versionCodeParam: Int,
@@ -50,9 +55,23 @@ internal fun Project.configureApplication(
             targetCompatibility = JavaVersion.VERSION_11
         }
     }
+
+    extensions.configure<ComposeExtension> {
+        this.extensions.configure<DesktopExtension> {
+            application {
+                mainClass = "$namespaceParam.MainKt"
+
+                nativeDistributions {
+                    targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb, TargetFormat.Exe)
+                    packageName = namespaceParam
+                    packageVersion = versionNameParam
+                }
+            }
+        }
+    }
 }
 
-fun Project.androidApplication(scope: ProjectApplicationScope.() -> Unit) {
+fun Project.application(scope: ProjectApplicationScope.() -> Unit) {
 
     with(ProjectApplicationScope) { scope() }
 

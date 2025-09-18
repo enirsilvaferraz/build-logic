@@ -1,8 +1,8 @@
 import com.eferraz.buildlogic.CatalogDefinitions.Bundles.NAVIGATION_COMMON
 import com.eferraz.buildlogic.CatalogDefinitions.Plugins.KOTLIN_SERIALIZATION
-import com.eferraz.buildlogic.bundle
-import com.eferraz.buildlogic.libs
-import com.eferraz.buildlogic.plugin
+import com.eferraz.buildlogic.ext.bundle
+import com.eferraz.buildlogic.ext.libs
+import com.eferraz.buildlogic.ext.plugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
