@@ -43,10 +43,8 @@ internal class LibraryKoinPlugin : Plugin<Project> {
                         }
                     }
 
-                    commonTest {
-                        dependencies {
-                            implementation(libs.bundle(KOIN_COMMON_TEST))
-                        }
+                    commonTest.dependencies {
+                        implementation(libs.bundle(KOIN_COMMON_TEST))
                     }
                 }
             }

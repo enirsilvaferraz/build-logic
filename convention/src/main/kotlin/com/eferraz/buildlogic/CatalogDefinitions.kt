@@ -4,11 +4,11 @@ internal interface CatalogDefinitions {
 
     enum class Plugins(val alias: String) {
         ANDROID_APPLICATION("android.application"),
+        ANDROID_LIBRARY("android.library"),
         COMPOSE_COMPILER("compose-compiler"),
         COMPOSE_MULTIPLATFORM("compose-multiplatform"),
         KSP("ksp"),
         KOTLIN_MULTIPLATFORM("kotlin-multiplatform"),
-        KOTLIN_MULTIPLATFORM_LIBRARY("android-kotlin-multiplatform-library"),
         ROOM("room"),
         KOTLIN_SERIALIZATION("kotlin-serialization")
     }

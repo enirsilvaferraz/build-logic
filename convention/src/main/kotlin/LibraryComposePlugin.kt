@@ -1,7 +1,6 @@
 import com.eferraz.buildlogic.CatalogDefinitions.Libraries.ACTIVITY_COMPOSE
 import com.eferraz.buildlogic.CatalogDefinitions.Plugins.COMPOSE_COMPILER
 import com.eferraz.buildlogic.CatalogDefinitions.Plugins.COMPOSE_MULTIPLATFORM
-import com.eferraz.buildlogic.CatalogDefinitions.Plugins.KOTLIN_MULTIPLATFORM
 import com.eferraz.buildlogic.library
 import com.eferraz.buildlogic.libs
 import com.eferraz.buildlogic.plugin
@@ -21,14 +20,15 @@ internal class LibraryComposePlugin : Plugin<Project> {
 
         with(target) {
 
-            apply(plugin = libs.plugin(KOTLIN_MULTIPLATFORM))
             apply(plugin = libs.plugin(COMPOSE_MULTIPLATFORM))
             apply(plugin = libs.plugin(COMPOSE_COMPILER))
 
             val compose = extensions.getByType<ComposeExtension>().dependencies
 
             extensions.configure<KotlinMultiplatformExtension> {
+
                 sourceSets {
+
                     commonMain.dependencies {
                         implementation(compose.runtime)
                         implementation(compose.foundation)
@@ -41,7 +41,6 @@ internal class LibraryComposePlugin : Plugin<Project> {
                     }
 
                     commonTest.dependencies {
-
                         @OptIn(ExperimentalComposeLibrary::class)
                         implementation(compose.uiTest)
                     }

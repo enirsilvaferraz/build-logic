@@ -25,10 +25,8 @@ internal class LibraryRoomPlugin : Plugin<Project> {
 
             extensions.configure<KotlinMultiplatformExtension> {
                 sourceSets {
-                    commonMain {
-                        dependencies {
-                            implementation(libs.bundle(ROOM_COMMON))
-                        }
+                    commonMain.dependencies {
+                        implementation(libs.bundle(ROOM_COMMON))
                     }
                 }
             }
@@ -37,7 +35,7 @@ internal class LibraryRoomPlugin : Plugin<Project> {
                 listOf(
                     "kspAndroid",
                     "kspIosSimulatorArm64",
-                    "kspIosX64",
+                    "kspDesktop",
                     "kspIosArm64"
                 ).forEach {
                     add(it, libs.bundle(ROOM_COMMON_COMPILER))

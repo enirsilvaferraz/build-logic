@@ -134,7 +134,7 @@ navigation-common = [
 
 [plugins]
 
-android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
+#android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 android-lint = { id = "com.android.lint", version.ref = "agp" }
@@ -146,10 +146,10 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "room" }
 
 # Internal Plugins
-foundation-kmp-library = { id = "foundation.kmp.library" }
-foundation-kmp-application = { id = "foundation.kmp.application" }
-foundation-compose = { id = "foundation.compose" }
-foundation-navigation = { id = "foundation.navigation" }
-foundation-koin = { id = "foundation.koin" }
-foundation-ktor = { id = "foundation.ktor" }
-foundation-room = { id = "foundation.room" }
+foundation-project-application = { id = "foundation.kmp.application" }
+foundation-project-library = { id = "foundation.kmp.library" }
+foundation-library-compose = { id = "foundation.compose" }
+foundation-library-navigation = { id = "foundation.navigation" }
+foundation-library-koin = { id = "foundation.koin" }
+foundation-library-ktor = { id = "foundation.ktor" }
+foundation-library-room = { id = "foundation.room" }

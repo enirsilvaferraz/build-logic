@@ -13,49 +13,49 @@ gradlePlugin {
 
     plugins {
 
-        libs.plugins.foundation.kmp.application.get().pluginId.let {
+        libs.plugins.foundation.project.application.get().pluginId.let {
             register(it) {
                 id = it
                 implementationClass = "KmpApplicationPlugin"
             }
         }
 
-        libs.plugins.foundation.kmp.library.get().pluginId.let {
+        libs.plugins.foundation.project.library.get().pluginId.let {
             register(it) {
                 id = it
                 implementationClass = "KmpLibraryPlugin"
             }
         }
 
-        libs.plugins.foundation.compose.get().pluginId.let {
+        libs.plugins.foundation.library.compose.get().pluginId.let {
             register(it) {
                 id = it
                 implementationClass = "LibraryComposePlugin"
             }
         }
 
-        libs.plugins.foundation.navigation.get().pluginId.let {
+        libs.plugins.foundation.library.navigation.get().pluginId.let {
             register(it) {
                 id = it
                 implementationClass = "LibraryNavigationPlugin"
             }
         }
 
-        libs.plugins.foundation.koin.get().pluginId.let {
+        libs.plugins.foundation.library.koin.get().pluginId.let {
             register(it) {
                 id = it
                 implementationClass = "LibraryKoinPlugin"
             }
         }
 
-        libs.plugins.foundation.room.get().pluginId.let {
+        libs.plugins.foundation.library.room.get().pluginId.let {
             register(it) {
                 id = it
                 implementationClass = "LibraryRoomPlugin"
             }
         }
 
-        libs.plugins.foundation.ktor.get().pluginId.let {
+        libs.plugins.foundation.library.ktor.get().pluginId.let {
             register(it) {
                 id = it
                 implementationClass = "LibraryKtorPlugin"

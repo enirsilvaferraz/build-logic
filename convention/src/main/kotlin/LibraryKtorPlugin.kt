@@ -24,22 +24,16 @@ internal class LibraryKtorPlugin : Plugin<Project> {
 
                 sourceSets {
 
-                    commonMain {
-                        dependencies {
-                            implementation(libs.bundle(KTOR_COMMON))
-                        }
+                    commonMain.dependencies {
+                        implementation(libs.bundle(KTOR_COMMON))
                     }
 
-                    androidMain {
-                        dependencies {
-                            implementation(libs.bundle(KTOR_ANDROID))
-                        }
+                    androidMain.dependencies {
+                        implementation(libs.bundle(KTOR_ANDROID))
                     }
 
-                    iosMain {
-                        dependencies {
-                            implementation(libs.bundle(KTOR_IOS))
-                        }
+                    iosMain.dependencies {
+                        implementation(libs.bundle(KTOR_IOS))
                     }
                 }
             }

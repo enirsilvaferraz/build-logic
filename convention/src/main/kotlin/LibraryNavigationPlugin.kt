@@ -20,10 +20,8 @@ internal class LibraryNavigationPlugin : Plugin<Project> {
 
             extensions.configure<KotlinMultiplatformExtension> {
                 sourceSets {
-                    commonMain {
-                        dependencies {
-                            implementation(libs.bundle(NAVIGATION_COMMON))
-                        }
+                    commonMain.dependencies {
+                        implementation(libs.bundle(NAVIGATION_COMMON))
                     }
                 }
             }
