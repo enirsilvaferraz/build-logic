@@ -31,6 +31,7 @@ internal interface CatalogDefinitions {
         KTOR_COMMON("ktor-common"),
         KTOR_ANDROID("ktor-android"),
         KTOR_IOS("ktor-ios"),
+        KTOR_DESKTOP("ktor-desktop"),
 
         KOIN_COMMON("koin-common"),
         KOIN_COMMON_COMPOSE("koin-common-compose"),

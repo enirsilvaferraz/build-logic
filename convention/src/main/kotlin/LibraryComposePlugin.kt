@@ -48,6 +48,10 @@ internal class LibraryComposePlugin : Plugin<Project> {
                     androidMain.dependencies {
                         implementation(libs.library(ACTIVITY_COMPOSE))
                     }
+
+                    jvmMain.dependencies {
+                        implementation(compose.desktop.currentOs)
+                    }
                 }
             }
         }

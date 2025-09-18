@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 internal fun KotlinMultiplatformExtension.configureDesktopTarget() {
-    jvm("desktop")
+    jvm()
 }
 
 internal fun KotlinMultiplatformExtension.configureAndroidTarget() {

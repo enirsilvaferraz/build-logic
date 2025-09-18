@@ -1,5 +1,6 @@
 import com.eferraz.buildlogic.CatalogDefinitions.Bundles.KTOR_ANDROID
 import com.eferraz.buildlogic.CatalogDefinitions.Bundles.KTOR_COMMON
+import com.eferraz.buildlogic.CatalogDefinitions.Bundles.KTOR_DESKTOP
 import com.eferraz.buildlogic.CatalogDefinitions.Bundles.KTOR_IOS
 import com.eferraz.buildlogic.CatalogDefinitions.Plugins.KOTLIN_SERIALIZATION
 import com.eferraz.buildlogic.bundle
@@ -34,6 +35,10 @@ internal class LibraryKtorPlugin : Plugin<Project> {
 
                     iosMain.dependencies {
                         implementation(libs.bundle(KTOR_IOS))
+                    }
+
+                    jvmMain.dependencies {
+                        implementation(libs.bundle(KTOR_DESKTOP))
                     }
                 }
             }

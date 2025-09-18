@@ -35,7 +35,7 @@ internal class LibraryRoomPlugin : Plugin<Project> {
                 listOf(
                     "kspAndroid",
                     "kspIosSimulatorArm64",
-                    "kspDesktop",
+                    "kspJvm",
                     "kspIosArm64"
                 ).forEach {
                     add(it, libs.bundle(ROOM_COMMON_COMPILER))
