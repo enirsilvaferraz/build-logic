@@ -31,7 +31,7 @@ internal class LibraryKoinPlugin : Plugin<Project> {
 
                     commonMain {
 
-                        kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin/org/koin/ksp/generated")
+                        kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
 
                         dependencies {
 
