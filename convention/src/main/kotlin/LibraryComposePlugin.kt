@@ -1,5 +1,7 @@
+import com.eferraz.buildlogic.CatalogDefinitions
 import com.eferraz.buildlogic.CatalogDefinitions.Libraries.ACTIVITY_COMPOSE
 import com.eferraz.buildlogic.CatalogDefinitions.Plugins.COMPOSE_COMPILER
+import com.eferraz.buildlogic.CatalogDefinitions.Plugins.COMPOSE_HOT_RELOAD
 import com.eferraz.buildlogic.CatalogDefinitions.Plugins.COMPOSE_MULTIPLATFORM
 import com.eferraz.buildlogic.ext.library
 import com.eferraz.buildlogic.ext.libs
@@ -22,6 +24,7 @@ internal class LibraryComposePlugin : Plugin<Project> {
 
             apply(plugin = libs.plugin(COMPOSE_MULTIPLATFORM))
             apply(plugin = libs.plugin(COMPOSE_COMPILER))
+            apply(plugin = libs.plugin(COMPOSE_HOT_RELOAD))
 
             val compose = extensions.getByType<ComposeExtension>().dependencies
 

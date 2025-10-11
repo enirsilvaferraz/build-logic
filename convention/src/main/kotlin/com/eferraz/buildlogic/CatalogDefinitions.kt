@@ -6,6 +6,7 @@ internal interface CatalogDefinitions {
         ANDROID_APPLICATION("android.application"),
         ANDROID_LIBRARY("android.library"),
         COMPOSE_COMPILER("compose-compiler"),
+        COMPOSE_HOT_RELOAD("compose-hot-reload"),
         COMPOSE_MULTIPLATFORM("compose-multiplatform"),
         KSP("ksp"),
         KOTLIN_MULTIPLATFORM("kotlin-multiplatform"),
