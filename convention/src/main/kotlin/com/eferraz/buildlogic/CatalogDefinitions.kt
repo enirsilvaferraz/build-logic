@@ -18,7 +18,8 @@ internal interface CatalogDefinitions {
         KOTLIN_STDLIB("kotlin-stdlib"),
         KOTLIN_TEST("kotlin-test"),
         KOIN_BOM("koin-bom"),
-        ACTIVITY_COMPOSE("androidx-activity-compose")
+        ACTIVITY_COMPOSE("androidx-activity-compose"),
+        COMPOSE_WINDOW_SUITE("compose-window-size")
     }
 
     enum class Versions(val alias: String) {

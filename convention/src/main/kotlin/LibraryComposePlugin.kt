@@ -1,5 +1,6 @@
 import com.eferraz.buildlogic.CatalogDefinitions
 import com.eferraz.buildlogic.CatalogDefinitions.Libraries.ACTIVITY_COMPOSE
+import com.eferraz.buildlogic.CatalogDefinitions.Libraries.COMPOSE_WINDOW_SUITE
 import com.eferraz.buildlogic.CatalogDefinitions.Plugins.COMPOSE_COMPILER
 import com.eferraz.buildlogic.CatalogDefinitions.Plugins.COMPOSE_HOT_RELOAD
 import com.eferraz.buildlogic.CatalogDefinitions.Plugins.COMPOSE_MULTIPLATFORM
@@ -36,11 +37,13 @@ internal class LibraryComposePlugin : Plugin<Project> {
                         implementation(compose.runtime)
                         implementation(compose.foundation)
                         implementation(compose.material3)
+                        implementation(compose.material3AdaptiveNavigationSuite)
                         implementation(compose.materialIconsExtended)
                         implementation(compose.ui)
                         implementation(compose.uiUtil)
                         implementation(compose.components.resources)
                         implementation(compose.components.uiToolingPreview)
+                        implementation(libs.library(COMPOSE_WINDOW_SUITE))
                     }
 
                     commonTest.dependencies {
