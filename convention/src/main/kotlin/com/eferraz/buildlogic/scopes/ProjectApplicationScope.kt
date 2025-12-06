@@ -65,6 +65,7 @@ private fun Project.configureApplication(
                     targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb, TargetFormat.Exe)
                     packageName = namespaceParam
                     packageVersion = versionNameParam
+                    jvmArgs("-Dapple.awt.application.appearance=system")
                 }
             }
         }
