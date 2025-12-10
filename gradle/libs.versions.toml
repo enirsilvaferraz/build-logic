@@ -5,7 +5,7 @@ android-minSdk = "30"
 android-targetSdk = "36"
 
 agp = "8.13.1"
-androidx-activity = "1.12.0"
+androidx-activity = "1.12.1"
 androidx-lifecycle = "2.9.6"
 coil = "3.3.0"
 cmp = "1.10.0-rc01"
@@ -14,9 +14,9 @@ coroutines = "1.10.2"
 kermit = "2.0.8"
 koin-bom = "4.1.1"
 koin-annotations = "2.3.1"
-kotlin = "2.2.21"
+kotlin = "2.3.0-RC3"
 kotlinx-serialization = "1.9.0"
-ksp = "2.2.21-RC-2.0.4"
+ksp = "2.3.3"
 ktor = "3.3.3"
 navigation-compose = "2.9.1"
 paging = "3.3.0-alpha02-0.5.1"
@@ -68,6 +68,7 @@ ktor-client-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.r
 ktor-client-cio = { group = "io.ktor", name = "ktor-client-cio-jvm", version.ref = "ktor" }
 ktor-client-encoding = { group = "io.ktor", name = "ktor-client-encoding", version.ref = "ktor" }
 ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
+ktor-client-auth = { group = "io.ktor", name = "ktor-client-auth", version.ref = "ktor" }
 ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
 
@@ -98,6 +99,7 @@ ktor-common = [
     "ktor-client-core",
     "ktor-client-encoding",
     "ktor-client-logging",
+    "ktor-client-auth",
     "ktor-serialization-kotlinx-json",
     "ktor-client-content-negotiation",
     "kermit"
