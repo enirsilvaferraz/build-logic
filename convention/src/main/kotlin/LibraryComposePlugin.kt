@@ -25,7 +25,7 @@ internal class LibraryComposePlugin : Plugin<Project> {
 
             apply(plugin = libs.plugin(COMPOSE_MULTIPLATFORM))
             apply(plugin = libs.plugin(COMPOSE_COMPILER))
-            apply(plugin = libs.plugin(COMPOSE_HOT_RELOAD))
+//            apply(plugin = libs.plugin(COMPOSE_HOT_RELOAD))
 
             val compose = extensions.getByType<ComposeExtension>().dependencies
 
