@@ -1,5 +1,5 @@
 import com.eferraz.buildlogic.AbstractKmpProjectPlugin
-import com.eferraz.buildlogic.CatalogDefinitions.Plugins.ANDROID_APPLICATION
+import com.eferraz.buildlogic.CatalogDefinitions.Plugins.ANDROID_LIBRARY
 import com.eferraz.buildlogic.ext.configureAndroidTarget
 import com.eferraz.buildlogic.ext.configureDesktopTarget
 import com.eferraz.buildlogic.ext.configureIOSTarget
@@ -18,7 +18,7 @@ internal class KmpApplicationPlugin : AbstractKmpProjectPlugin() {
 
         with(target) {
 
-            apply(plugin = libs.plugin(ANDROID_APPLICATION))
+            apply(plugin = libs.plugin(ANDROID_LIBRARY))
 
             extensions.configure<KotlinMultiplatformExtension> {
                 configureAndroidTarget()
