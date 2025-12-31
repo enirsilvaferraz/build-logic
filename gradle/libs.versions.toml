@@ -4,7 +4,7 @@ android-compileSdk = "36"
 android-minSdk = "30"
 android-targetSdk = "36"
 
-agp = "9.0.0-rc01"
+agp = "9.0.0-rc02"
 androidx-activity = "1.12.2"
 androidx-lifecycle = "2.9.6"
 coil = "3.3.0"
@@ -43,6 +43,7 @@ jetbrains-lifecycle-viewmodelNavigation3 = { module = "org.jetbrains.androidx.li
 
 # Compose
 compose-window-size = { group = "org.jetbrains.compose.material3", name = "material3-window-size-class" , version ="1.9.0"}
+compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "cmp" }
 
 # Android
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity" }
@@ -179,4 +180,3 @@ foundation-library-navigation = { id = "foundation.navigation" }
 foundation-library-koin = { id = "foundation.koin" }
 foundation-library-ktor = { id = "foundation.ktor" }
 foundation-library-room = { id = "foundation.room" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
