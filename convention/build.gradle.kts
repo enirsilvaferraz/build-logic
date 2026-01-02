@@ -14,17 +14,10 @@ gradlePlugin {
 
     plugins {
 
-        libs.plugins.foundation.project.application.get().pluginId.let {
-            register(it) {
-                id = it
-                implementationClass = "KmpApplicationPlugin"
-            }
-        }
-
         libs.plugins.foundation.project.library.get().pluginId.let {
             register(it) {
                 id = it
-                implementationClass = "KmpLibraryPlugin"
+                implementationClass = "KmpProjectPlugin"
             }
         }
 
@@ -32,13 +25,6 @@ gradlePlugin {
             register(it) {
                 id = it
                 implementationClass = "LibraryComposePlugin"
-            }
-        }
-
-        libs.plugins.foundation.library.navigation.get().pluginId.let {
-            register(it) {
-                id = it
-                implementationClass = "LibraryNavigationPlugin"
             }
         }
 

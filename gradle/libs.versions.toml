@@ -23,9 +23,11 @@ room = "2.8.4"
 sqlite = "2.6.2"
 coreKtx = "1.17.0"
 multiplatform-nav3-ui = "1.0.0-alpha06"
-compose-multiplatform-adaptive = "1.3.0-alpha03"
 compose-multiplatform-lifecycle = "2.10.0-alpha07"
 uiTooling = "1.10.0"
+compose-adaptive = "1.3.0-alpha03"
+kotlinx-datetime = "0.7.1"
+mockk = "1.14.7"
 
 [libraries]
 
@@ -37,14 +39,6 @@ kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-c
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "coroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
-
-jetbrains-navigation3-ui = { module = "org.jetbrains.androidx.navigation3:navigation3-ui", version.ref = "multiplatform-nav3-ui" }
-jetbrains-material3-adaptiveNavigation3 = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation3", version.ref = "compose-multiplatform-adaptive" }
-jetbrains-lifecycle-viewmodelNavigation3 = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "compose-multiplatform-lifecycle" }
-
-# Compose
-compose-window-size = { group = "org.jetbrains.compose.material3", name = "material3-window-size-class" , version ="1.9.0"}
-compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "cmp" }
 
 # Android
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity" }
@@ -93,6 +87,30 @@ room-sqlite-bundled = { group = "androidx.sqlite", name = "sqlite-bundled", vers
 # Logging
 kermit = { group = "co.touchlab", name = "kermit", version.ref = "kermit" }
 
+# Compose Runtime
+compose-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime", version.ref = "cmp" }
+compose-foundation = { group = "org.jetbrains.compose.foundation", name = "foundation", version.ref = "cmp" }
+compose-components-resources = { group = "org.jetbrains.compose.components", name = "components-resources", version.ref = "cmp" }
+compose-ui-tooling-preview = { group = "org.jetbrains.compose.ui", name = "ui-tooling-preview", version.ref = "cmp" }
+compose-ui = { group = "org.jetbrains.compose.ui", name="ui", version.ref = "cmp" }
+
+compose-material3 = { group = "org.jetbrains.compose.material3", name = "material3", version = "cmp" }
+compose-window-size = { group = "org.jetbrains.compose.material3", name = "material3-window-size-class" , version ="1.9.0"}
+
+compose-adaptive = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive", version.ref = "compose-adaptive" }
+compose-adaptive-layout = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive-layout", version.ref = "compose-adaptive" }
+compose-adaptive-navigation = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive-navigation", version.ref = "compose-adaptive" }
+
+jetbrains-navigation3-ui = { module = "org.jetbrains.androidx.navigation3:navigation3-ui", version.ref = "multiplatform-nav3-ui" }
+jetbrains-lifecycle-viewmodelNavigation3 = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "compose-multiplatform-lifecycle" }
+
+# Kotlinx
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
+
+# Mockk
+mockk-android = { group = "io.mockk", name = "mockk-android", version.ref = "mockk" }
+mockk-agent = { group = "io.mockk", name = "mockk-agent", version.ref = "mockk" }
+
 # Dependencies of the included build-logic
 gradle-plugin-android = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 gradle-plugin-compose = { group = "org.jetbrains.compose", name = "org.jetbrains.compose.gradle.plugin", version.ref = "cmp" }
@@ -101,6 +119,15 @@ gradle-plugin-room = { group = "androidx.room", name = "room-gradle-plugin", ver
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 
 [bundles]
+
+kotlin-common = [
+    "kotlin-stdlib",
+    "kotlinx-datetime"
+]
+kotlin-common-test = [
+    "kotlin-test",
+    "kotlinx-coroutines-test"
+]
 
 # Ktor
 ktor-common = [
@@ -152,19 +179,28 @@ room-common-compiler = [
     "room-compiler"
 ]
 
-# Navigation
-navigation-common = [
+# Compose
+compose-common = [
+    "compose-runtime",
+    "compose-foundation",
+    "compose-material3",
+    "compose-ui",
+    "compose-components-resources",
+    "compose-ui-tooling-preview"
+]
+compose-adaptive-bundle = [
     "kotlinx-serialization",
+    "compose-adaptive",
+    "compose-adaptive-layout",
+    "compose-adaptive-navigation",
     "jetbrains-navigation3-ui",
     "jetbrains-lifecycle-viewmodelNavigation3",
-    "jetbrains-material3-adaptiveNavigation3"
 ]
 
 [plugins]
 
-#android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 android-application = { id = "com.android.application", version.ref = "agp" }
-android-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
+multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 android-lint = { id = "com.android.lint", version.ref = "agp" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "cmp" }
@@ -175,10 +211,8 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "room" }
 
 # Internal Plugins
-foundation-project-application = { id = "foundation.kmp.application" }
 foundation-project-library = { id = "foundation.kmp.library" }
 foundation-library-compose = { id = "foundation.compose" }
-foundation-library-navigation = { id = "foundation.navigation" }
 foundation-library-koin = { id = "foundation.koin" }
 foundation-library-ktor = { id = "foundation.ktor" }
 foundation-library-room = { id = "foundation.room" }
