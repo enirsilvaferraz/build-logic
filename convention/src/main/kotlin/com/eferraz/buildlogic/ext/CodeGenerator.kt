@@ -15,7 +15,7 @@ import java.util.Properties
  * @param packageName O pacote onde o TokenConfig será gerado (ex: "com.eferraz.network")
  * @param properties Lista de nomes de propriedades no local.properties (ex: listOf("BRAPI_TOKEN", "API_KEY"))
  */
-fun Project.configureTokenConfigGeneration(
+fun Project.generateConstants(
     fileName: String,
     packageName: String,
     properties: List<String>,
