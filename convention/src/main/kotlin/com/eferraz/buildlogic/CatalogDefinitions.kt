@@ -29,6 +29,7 @@ internal interface CatalogDefinitions {
 
         KOTLIN_COMMON("kotlin-common"),
         KOTLIN_COMMON_TEST("kotlin-common-test"),
+        KOTLIN_ANDROID_TEST("kotlin-android-test"),
 
         KTOR_COMMON("ktor-common"),
         KTOR_ANDROID("ktor-android"),

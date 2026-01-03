@@ -128,6 +128,10 @@ kotlin-common-test = [
     "kotlin-test",
     "kotlinx-coroutines-test"
 ]
+kotlin-android-test = [
+    "mockk-android",
+    "mockk-agent"
+]
 
 # Ktor
 ktor-common = [

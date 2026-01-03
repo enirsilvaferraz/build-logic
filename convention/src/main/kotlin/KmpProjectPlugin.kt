@@ -4,9 +4,6 @@ import com.eferraz.buildlogic.CatalogDefinitions.Plugins.KOTLIN_MULTIPLATFORM
 import com.eferraz.buildlogic.CatalogDefinitions.Plugins.KOTLIN_SERIALIZATION
 import com.eferraz.buildlogic.CatalogDefinitions.Plugins.MULTIPLATFORM_LIBRARY
 import com.eferraz.buildlogic.ext.bundle
-import com.eferraz.buildlogic.ext.configureAndroidTarget
-import com.eferraz.buildlogic.ext.configureDesktopTarget
-import com.eferraz.buildlogic.ext.configureIOSTarget
 import com.eferraz.buildlogic.ext.libs
 import com.eferraz.buildlogic.ext.plugin
 import org.gradle.api.Plugin
@@ -35,6 +32,19 @@ internal class KmpProjectPlugin : Plugin<Project> {
                     freeCompilerArgs.add("-Xexpect-actual-classes")
                 }
 
+                jvm()
+
+                listOf(
+                    iosArm64(),
+                    iosSimulatorArm64()
+                ).forEach { iosTarget ->
+                    project.name.capitalized().let {
+                        iosTarget.binaries.framework {
+                            baseName = it
+                        }
+                    }
+                }
+
                 sourceSets {
 
                     commonMain.dependencies {
@@ -45,10 +55,6 @@ internal class KmpProjectPlugin : Plugin<Project> {
                         implementation(libs.bundle(KOTLIN_COMMON_TEST))
                     }
                 }
-
-                configureAndroidTarget()
-                configureIOSTarget(project.name.capitalized())
-                configureDesktopTarget()
             }
         }
     }
