@@ -14,9 +14,7 @@ internal interface CatalogDefinitions {
     }
 
     enum class Libraries(val alias: String) {
-        KOIN_BOM("koin-bom"),
-        ACTIVITY_COMPOSE("androidx-activity-compose"),
-        COMPOSE_WINDOW_SUITE("compose-window-size")
+        KOIN_BOM("koin-bom")
     }
 
     enum class Versions(val alias: String) {
@@ -26,6 +24,8 @@ internal interface CatalogDefinitions {
     }
 
     enum class Bundles(val alias: String) {
+
+        COMPOSE_COMMON("compose-common"),
 
         KOTLIN_COMMON("kotlin-common"),
         KOTLIN_COMMON_TEST("kotlin-common-test"),
