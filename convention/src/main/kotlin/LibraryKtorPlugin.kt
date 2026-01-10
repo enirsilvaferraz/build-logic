@@ -1,11 +1,4 @@
-import com.eferraz.buildlogic.CatalogDefinitions.Bundles.KTOR_ANDROID
-import com.eferraz.buildlogic.CatalogDefinitions.Bundles.KTOR_COMMON
-import com.eferraz.buildlogic.CatalogDefinitions.Bundles.KTOR_DESKTOP
-import com.eferraz.buildlogic.CatalogDefinitions.Bundles.KTOR_IOS
-import com.eferraz.buildlogic.CatalogDefinitions.Plugins.KOTLIN_SERIALIZATION
-import com.eferraz.buildlogic.ext.bundle
 import com.eferraz.buildlogic.ext.libs
-import com.eferraz.buildlogic.ext.plugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
@@ -19,26 +12,26 @@ internal class LibraryKtorPlugin : Plugin<Project> {
 
         with(target) {
 
-            apply(plugin = libs.plugin(KOTLIN_SERIALIZATION))
+            apply(plugin = libs.plugins.kotlin.serialization.get().pluginId)
 
             extensions.configure<KotlinMultiplatformExtension> {
 
                 sourceSets {
 
                     commonMain.dependencies {
-                        implementation(libs.bundle(KTOR_COMMON))
+                        implementation(libs.bundles.ktor.common)
                     }
 
                     androidMain.dependencies {
-                        implementation(libs.bundle(KTOR_ANDROID))
+                        implementation(libs.bundles.ktor.android)
                     }
 
                     iosMain.dependencies {
-                        implementation(libs.bundle(KTOR_IOS))
+                        implementation(libs.bundles.ktor.ios)
                     }
 
                     jvmMain.dependencies {
-                        implementation(libs.bundle(KTOR_DESKTOP))
+                        implementation(libs.bundles.ktor.desktop)
                     }
                 }
             }

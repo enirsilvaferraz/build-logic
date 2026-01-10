@@ -1,14 +1,5 @@
 import com.android.build.gradle.internal.utils.isComposeCompilerPluginApplied
-import com.eferraz.buildlogic.CatalogDefinitions.Bundles.KOIN_COMMON
-import com.eferraz.buildlogic.CatalogDefinitions.Bundles.KOIN_COMMON_COMPILER
-import com.eferraz.buildlogic.CatalogDefinitions.Bundles.KOIN_COMMON_COMPOSE
-import com.eferraz.buildlogic.CatalogDefinitions.Bundles.KOIN_COMMON_TEST
-import com.eferraz.buildlogic.CatalogDefinitions.Libraries.KOIN_BOM
-import com.eferraz.buildlogic.CatalogDefinitions.Plugins.KSP
-import com.eferraz.buildlogic.ext.bundle
-import com.eferraz.buildlogic.ext.library
 import com.eferraz.buildlogic.ext.libs
-import com.eferraz.buildlogic.ext.plugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
@@ -23,7 +14,7 @@ internal class LibraryKoinPlugin : Plugin<Project> {
 
         with(target) {
 
-            apply(plugin = libs.plugin(KSP))
+            apply(plugin = libs.plugins.ksp.get().pluginId)
 
             extensions.configure<KotlinMultiplatformExtension> {
 
@@ -35,22 +26,22 @@ internal class LibraryKoinPlugin : Plugin<Project> {
 
                         dependencies {
 
-                            implementation(project.dependencies.platform(libs.library(KOIN_BOM)))
-                            implementation(libs.bundle(KOIN_COMMON))
+                            implementation(project.dependencies.platform(libs.koin.bom))
+                            implementation(libs.bundles.koin.common)
 
                             if (isComposeCompilerPluginApplied(project))
-                                implementation(libs.bundle(KOIN_COMMON_COMPOSE))
+                                implementation(libs.bundles.koin.common.compose)
                         }
                     }
 
                     commonTest.dependencies {
-                        implementation(libs.bundle(KOIN_COMMON_TEST))
+                        implementation(libs.bundles.koin.common.test)
                     }
                 }
             }
 
             dependencies {
-                add("kspCommonMainMetadata", libs.bundle(KOIN_COMMON_COMPILER))
+                add("kspCommonMainMetadata", libs.bundles.koin.common.compiler)
             }
 
             // Issue fix https://github.com/InsertKoinIO/koin/issues/2174

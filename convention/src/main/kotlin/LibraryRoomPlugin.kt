@@ -1,11 +1,5 @@
 import androidx.room.gradle.RoomExtension
-import com.eferraz.buildlogic.CatalogDefinitions.Bundles.ROOM_COMMON
-import com.eferraz.buildlogic.CatalogDefinitions.Bundles.ROOM_COMMON_COMPILER
-import com.eferraz.buildlogic.CatalogDefinitions.Plugins.KSP
-import com.eferraz.buildlogic.CatalogDefinitions.Plugins.ROOM
-import com.eferraz.buildlogic.ext.bundle
 import com.eferraz.buildlogic.ext.libs
-import com.eferraz.buildlogic.ext.plugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
@@ -20,13 +14,13 @@ internal class LibraryRoomPlugin : Plugin<Project> {
 
         with(target) {
 
-            apply(plugin = libs.plugin(KSP))
-            apply(plugin = libs.plugin(ROOM))
+            apply(plugin = libs.plugins.ksp.get().pluginId)
+            apply(plugin = libs.plugins.room.get().pluginId)
 
             extensions.configure<KotlinMultiplatformExtension> {
                 sourceSets {
                     commonMain.dependencies {
-                        implementation(libs.bundle(ROOM_COMMON))
+                        implementation(libs.bundles.room.common)
                     }
                 }
             }
@@ -38,7 +32,7 @@ internal class LibraryRoomPlugin : Plugin<Project> {
                     "kspJvm",
                     "kspIosArm64"
                 ).forEach {
-                    add(it, libs.bundle(ROOM_COMMON_COMPILER))
+                    add(it, libs.bundles.room.common.compiler)
                 }
             }
 

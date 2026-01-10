@@ -1,11 +1,7 @@
 package com.eferraz.buildlogic.scopes
 
 import com.android.build.api.dsl.ApplicationExtension
-import com.eferraz.buildlogic.CatalogDefinitions.Versions.COMPILE_SDK
-import com.eferraz.buildlogic.CatalogDefinitions.Versions.MIN_SDK
-import com.eferraz.buildlogic.CatalogDefinitions.Versions.TARGET_SDK
 import com.eferraz.buildlogic.ext.libs
-import com.eferraz.buildlogic.ext.version
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -28,12 +24,12 @@ private fun Project.configureApplication(
     extensions.configure<ApplicationExtension> {
 
         namespace = namespaceParam
-        compileSdk = libs.version(COMPILE_SDK)
+        compileSdk = libs.versions.android.compileSdk.get().toInt()
 
         defaultConfig {
             applicationId = namespaceParam
-            minSdk = libs.version(MIN_SDK)
-            targetSdk = libs.version(TARGET_SDK)
+            minSdk = libs.versions.android.minSdk.get().toInt()
+            targetSdk = libs.versions.android.targetSdk.get().toInt()
             versionName = versionNameParam
             versionCode = versionCodeParam
         }

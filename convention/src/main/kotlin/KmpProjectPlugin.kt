@@ -1,11 +1,4 @@
-import com.eferraz.buildlogic.CatalogDefinitions.Bundles.KOTLIN_COMMON
-import com.eferraz.buildlogic.CatalogDefinitions.Bundles.KOTLIN_COMMON_TEST
-import com.eferraz.buildlogic.CatalogDefinitions.Plugins.KOTLIN_MULTIPLATFORM
-import com.eferraz.buildlogic.CatalogDefinitions.Plugins.KOTLIN_SERIALIZATION
-import com.eferraz.buildlogic.CatalogDefinitions.Plugins.MULTIPLATFORM_LIBRARY
-import com.eferraz.buildlogic.ext.bundle
 import com.eferraz.buildlogic.ext.libs
-import com.eferraz.buildlogic.ext.plugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.internal.extensions.stdlib.capitalized
@@ -20,9 +13,9 @@ internal class KmpProjectPlugin : Plugin<Project> {
 
         with(target) {
 
-            apply(plugin = libs.plugin(KOTLIN_MULTIPLATFORM))
-            apply(plugin = libs.plugin(KOTLIN_SERIALIZATION))
-            apply(plugin = libs.plugin(MULTIPLATFORM_LIBRARY))
+            apply(plugin = libs.plugins.kotlin.multiplatform.get().pluginId)
+            apply(plugin = libs.plugins.kotlin.serialization.get().pluginId)
+            apply(plugin = libs.plugins.multiplatform.library.get().pluginId)
 
             extensions.configure<KotlinMultiplatformExtension> {
 
@@ -48,11 +41,11 @@ internal class KmpProjectPlugin : Plugin<Project> {
                 sourceSets {
 
                     commonMain.dependencies {
-                        implementation(libs.bundle(KOTLIN_COMMON))
+                        implementation(libs.bundles.kotlin.common)
                     }
 
                     commonTest.dependencies {
-                        implementation(libs.bundle(KOTLIN_COMMON_TEST))
+                        implementation(libs.bundles.kotlin.common.test)
                     }
                 }
             }

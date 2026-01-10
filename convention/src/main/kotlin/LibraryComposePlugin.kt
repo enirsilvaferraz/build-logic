@@ -1,9 +1,4 @@
-import com.eferraz.buildlogic.CatalogDefinitions
-import com.eferraz.buildlogic.CatalogDefinitions.Plugins.COMPOSE_COMPILER
-import com.eferraz.buildlogic.CatalogDefinitions.Plugins.COMPOSE_MULTIPLATFORM
-import com.eferraz.buildlogic.ext.bundle
 import com.eferraz.buildlogic.ext.libs
-import com.eferraz.buildlogic.ext.plugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
@@ -17,8 +12,8 @@ internal class LibraryComposePlugin : Plugin<Project> {
 
         with(target) {
 
-            apply(plugin = libs.plugin(COMPOSE_MULTIPLATFORM))
-            apply(plugin = libs.plugin(COMPOSE_COMPILER))
+            apply(plugin = libs.plugins.compose.multiplatform.get().pluginId)
+            apply(plugin = libs.plugins.compose.compiler.get().pluginId)
 //            apply(plugin = libs.plugin(COMPOSE_HOT_RELOAD))
 
             extensions.configure<KotlinMultiplatformExtension> {
@@ -26,7 +21,7 @@ internal class LibraryComposePlugin : Plugin<Project> {
                 sourceSets {
 
                     commonMain.dependencies {
-                        implementation(libs.bundle(CatalogDefinitions.Bundles.COMPOSE_COMMON))
+                        implementation(libs.bundles.compose.common)
                     }
                 }
             }

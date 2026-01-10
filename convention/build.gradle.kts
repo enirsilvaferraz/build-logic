@@ -1,3 +1,6 @@
+import org.gradle.initialization.DependenciesAccessors
+import org.gradle.kotlin.dsl.support.serviceOf
+
 plugins {
     `kotlin-dsl`
     base
@@ -8,6 +11,9 @@ dependencies {
     compileOnly(libs.gradle.plugin.compose)
     compileOnly(libs.gradle.plugin.kotlin)
     compileOnly(libs.gradle.plugin.room)
+
+    // Permite que o plugin acesse as classes geradas do 'libs'
+    compileOnly(files(gradle.serviceOf<DependenciesAccessors>().classes.asFiles))
 }
 
 gradlePlugin {
