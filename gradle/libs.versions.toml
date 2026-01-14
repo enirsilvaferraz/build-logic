@@ -4,7 +4,7 @@ android-compileSdk = "36"
 android-minSdk = "30"
 android-targetSdk = "36"
 
-agp = "9.0.0-rc02"
+agp = "9.1.0-alpha04"
 androidx-activity = "1.12.2"
 androidx-lifecycle = "2.9.6"
 coil = "3.3.0"
@@ -111,6 +111,7 @@ jetbrains-lifecycle-viewmodelNavigation3 = { module = "org.jetbrains.androidx.li
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
 
 # Mockk
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 mockk-android = { group = "io.mockk", name = "mockk-android", version.ref = "mockk" }
 mockk-agent = { group = "io.mockk", name = "mockk-agent", version.ref = "mockk" }
 
@@ -130,6 +131,9 @@ kotlin-common = [
 kotlin-common-test = [
     "kotlin-test",
     "kotlinx-coroutines-test"
+]
+kotlin-jvm-test = [
+    "mockk"
 ]
 kotlin-android-test = [
     "mockk-android",

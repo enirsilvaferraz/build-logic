@@ -47,6 +47,10 @@ internal class KmpProjectPlugin : Plugin<Project> {
                     commonTest.dependencies {
                         implementation(libs.bundles.kotlin.common.test)
                     }
+
+                    jvmTest.dependencies {
+                        implementation(libs.bundles.kotlin.jvm.test)
+                    }
                 }
             }
         }
