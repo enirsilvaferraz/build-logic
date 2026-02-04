@@ -14,7 +14,7 @@ internal class LibraryComposePlugin : Plugin<Project> {
 
             apply(plugin = libs.plugins.compose.multiplatform.get().pluginId)
             apply(plugin = libs.plugins.compose.compiler.get().pluginId)
-//            apply(plugin = libs.plugin(COMPOSE_HOT_RELOAD))
+            apply(plugin = libs.plugins.compose.hot.reload.get().pluginId)
 
             extensions.configure<KotlinMultiplatformExtension> {
 
