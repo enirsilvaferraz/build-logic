@@ -222,8 +222,8 @@ room = { id = "androidx.room", version.ref = "room" }
 koin-compiler = { id = "io.insert-koin.compiler.plugin", version.ref = "koin-plugin" }
 
 # Internal Plugins
-foundation-project-library = { id = "foundation.kmp.library" }
-foundation-library-compose = { id = "foundation.compose" }
+foundation-project = { id = "foundation.kmp.project" }
+foundation-library-comp = { id = "foundation.compose" }
 foundation-library-koin = { id = "foundation.koin" }
 foundation-library-ktor = { id = "foundation.ktor" }
 foundation-library-room = { id = "foundation.room" }

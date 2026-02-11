@@ -20,14 +20,14 @@ gradlePlugin {
 
     plugins {
 
-        libs.plugins.foundation.project.library.get().pluginId.let {
+        libs.plugins.foundation.project.get().pluginId.let {
             register(it) {
                 id = it
                 implementationClass = "KmpProjectPlugin"
             }
         }
 
-        libs.plugins.foundation.library.compose.get().pluginId.let {
+        libs.plugins.foundation.library.comp.get().pluginId.let {
             register(it) {
                 id = it
                 implementationClass = "LibraryComposePlugin"
