@@ -18,6 +18,7 @@ kotlinx-serialization = "1.10.0"
 ksp = "2.3.3"
 ktor = "3.4.1"
 paging = "3.3.0-alpha02-0.5.1"
+androidx-paging = "3.4.2"
 room = "2.8.4"
 sqlite = "2.6.2"
 uiTooling = "1.10.5"
@@ -74,6 +75,7 @@ ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-conte
 # Paging
 paging-common = { group = "app.cash.paging", name = "paging-common", version.ref = "paging" }
 paging-compose-common = { group = "app.cash.paging", name = "paging-compose-common", version.ref = "paging" }
+androidx-paging-testing = { group = "androidx.paging", name = "paging-testing", version.ref = "androidx-paging" }
 
 # Room
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
