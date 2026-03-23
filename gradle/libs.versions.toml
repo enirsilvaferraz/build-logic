@@ -9,6 +9,8 @@ androidx-activity = "1.13.0"
 androidx-lifecycle = "2.10.0"
 coil = "3.4.0"
 cmp = "1.11.0-alpha04"
+# Alinhar com o Skiko trazido pelo Compose Desktop (Coil 3 pedia uma versão antiga e gerava aviso de incompatibilidade).
+skiko = "0.144.4"
 coroutines = "1.10.2"
 kermit = "2.1.0"
 koin-bom = "4.2.0"
