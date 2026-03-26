@@ -3,6 +3,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.invoke
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
@@ -17,12 +18,21 @@ internal class LibraryComposePlugin : Plugin<Project> {
 
             extensions.configure<KotlinMultiplatformExtension> {
 
+                compilerOptions {
+                    freeCompilerArgs.add("-Xreturn-value-checker=check")
+                    freeCompilerArgs.add("-Xexplicit-backing-fields")
+                }
+
                 sourceSets {
 
                     commonMain.dependencies {
                         implementation(libs.bundles.compose.common)
                     }
                 }
+            }
+
+            dependencies {
+                "androidRuntimeClasspath"(libs.androidx.ui.tooling)
             }
         }
     }
