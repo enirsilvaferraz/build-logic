@@ -1,11 +1,17 @@
+import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
 import com.eferraz.buildlogic.ext.libs
+import org.gradle.api.Action
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.plugins.ExtensionAware
 import org.gradle.internal.extensions.stdlib.capitalized
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.invoke
+import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 internal class KmpProjectPlugin : Plugin<Project> {
 
@@ -16,6 +22,10 @@ internal class KmpProjectPlugin : Plugin<Project> {
             apply(plugin = libs.plugins.kotlin.multiplatform.get().pluginId)
             apply(plugin = libs.plugins.kotlin.serialization.get().pluginId)
             apply(plugin = libs.plugins.multiplatform.library.get().pluginId)
+
+            tasks.withType<KotlinCompile>().configureEach {
+                compilerOptions { jvmTarget.set(JvmTarget.JVM_21) }
+            }
 
             extensions.configure<KotlinMultiplatformExtension> {
 
@@ -38,6 +48,12 @@ internal class KmpProjectPlugin : Plugin<Project> {
                     }
                 }
 
+                android {
+                    namespace = "com.eferraz.${project.name}"
+                    compileSdk = libs.versions.android.compileSdk.get().toInt()
+                    androidResources.enable = true
+                }
+
                 sourceSets {
 
                     commonMain.dependencies {
@@ -55,4 +71,7 @@ internal class KmpProjectPlugin : Plugin<Project> {
             }
         }
     }
+
+    fun KotlinMultiplatformExtension.android(configure: Action<KotlinMultiplatformAndroidLibraryTarget>): Unit =
+        (this as ExtensionAware).extensions.configure("android", configure)
 }
