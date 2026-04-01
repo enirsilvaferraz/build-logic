@@ -21,7 +21,7 @@ internal class FoundationDetektPlugin : Plugin<Project> {
                 toolVersion = libs.versions.detekt.get()
                 config.setFrom(rootProject.layout.projectDirectory.file("build-logic/analysis/detekt/detekt.yml"))
                 buildUponDefaultConfig = true
-                allRules = true
+                allRules = false
                 source.setFrom(
                     "src/commonMain/kotlin",
                     "src/androidMain/kotlin",

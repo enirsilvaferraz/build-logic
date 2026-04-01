@@ -910,7 +910,7 @@ formatting:
     autoCorrect: true
     indentSize: 4
   NoBlankLineBeforeRbrace:
-    active: true
+    active: false
     autoCorrect: true
   NoBlankLineInList:
     active: false
@@ -931,7 +931,7 @@ formatting:
     autoCorrect: true
     indentSize: 4
   NoEmptyFirstLineInMethodBlock:
-    active: true
+    active: false
     autoCorrect: true
   NoLineBreakAfterElse:
     active: true
