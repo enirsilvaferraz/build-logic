@@ -22,6 +22,7 @@ internal class KmpProjectPlugin : Plugin<Project> {
             apply(plugin = libs.plugins.kotlin.multiplatform.get().pluginId)
             apply(plugin = libs.plugins.kotlin.serialization.get().pluginId)
             apply(plugin = libs.plugins.multiplatform.library.get().pluginId)
+            apply(plugin = libs.plugins.foundation.detekt.get().pluginId)
 
             tasks.withType<KotlinCompile>().configureEach {
                 compilerOptions { jvmTarget.set(JvmTarget.JVM_21) }

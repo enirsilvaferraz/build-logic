@@ -11,6 +11,7 @@ dependencies {
     compileOnly(libs.gradle.plugin.compose)
     compileOnly(libs.gradle.plugin.kotlin)
     compileOnly(libs.gradle.plugin.room)
+    compileOnly(libs.gradle.plugin.detekt)
 
     // Permite que o plugin acesse as classes geradas do 'libs'
     compileOnly(files(gradle.serviceOf<DependenciesAccessors>().classes.asFiles))
@@ -52,6 +53,13 @@ gradlePlugin {
             register(it) {
                 id = it
                 implementationClass = "LibraryKtorPlugin"
+            }
+        }
+
+        libs.plugins.foundation.detekt.get().pluginId.let {
+            register(it) {
+                id = it
+                implementationClass = "FoundationDetektPlugin"
             }
         }
     }
