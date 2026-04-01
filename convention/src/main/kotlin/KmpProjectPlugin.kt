@@ -50,7 +50,8 @@ internal class KmpProjectPlugin : Plugin<Project> {
                 }
 
                 android {
-                    namespace = "com.eferraz.${project.name}"
+                    // project.name pode conter '-' (ex.: :design-system); identificadores Java não.
+                    namespace = "com.eferraz.${project.name.replace('-', '_')}"
                     compileSdk = libs.versions.android.compileSdk.get().toInt()
                     androidResources.enable = true
                 }
