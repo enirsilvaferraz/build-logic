@@ -1,6 +1,6 @@
 import com.eferraz.buildlogic.ext.libs
-import io.gitlab.arturbosch.detekt.Detekt
-import io.gitlab.arturbosch.detekt.extensions.DetektExtension
+import dev.detekt.gradle.Detekt
+import dev.detekt.gradle.extensions.DetektExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
@@ -18,10 +18,10 @@ internal class FoundationDetektPlugin : Plugin<Project> {
             apply(plugin = libs.plugins.detekt.get().pluginId)
 
             extensions.configure<DetektExtension>("detekt") {
-                toolVersion = libs.versions.detekt.get()
+                toolVersion.set(libs.versions.detekt.get())
                 config.setFrom(rootProject.layout.projectDirectory.file("build-logic/analysis/detekt/detekt.yml"))
-                buildUponDefaultConfig = true
-                allRules = false
+                buildUponDefaultConfig.set(true)
+                allRules.set(false)
                 source.setFrom(
                     "src/commonMain/kotlin",
                     "src/androidMain/kotlin",
@@ -32,11 +32,11 @@ internal class FoundationDetektPlugin : Plugin<Project> {
                 )
             }
 
-            val formattingDep = "io.gitlab.arturbosch.detekt:detekt-formatting:${libs.versions.detekt.get()}"
+            val formattingDep = "dev.detekt:detekt-rules-ktlint-wrapper:${libs.versions.detekt.get()}"
             dependencies.add("detektPlugins", formattingDep)
 
             tasks.withType<Detekt>().configureEach {
-                jvmTarget = "21"
+                jvmTarget.set("21")
                 reports {
                     html.required.set(true)
                     sarif.required.set(true)
