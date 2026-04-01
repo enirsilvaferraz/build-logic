@@ -968,7 +968,7 @@ ktlint:
   FunctionSignature:
     active: true
     autoCorrect: true
-    forceMultilineWhenParameterCountGreaterOrEqualThan: 2147483647
+    forceMultilineWhenParameterCountGreaterOrEqualThan: 1
     functionBodyExpressionWrapping: 'default'
     # maxLineLength: If the 'code_style' ruleset property is set to 'android', the default is '100', otherwise '120'.
     indentSize: 4
