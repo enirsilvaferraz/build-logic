@@ -694,7 +694,7 @@ style:
     maxChainedCalls: 5
   MaxLineLength:
     active: true
-    maxLineLength: 120
+    maxLineLength: 150
     excludePackageStatements: true
     excludeImportStatements: true
     excludeCommentStatements: false
@@ -1011,7 +1011,7 @@ ktlint:
   MaximumLineLength:
     active: true
     aliases: ['MaxLineLength']
-    # maxLineLength: If the 'code_style' ruleset property is set to 'android', the default is '100', otherwise '120'.
+    maxLineLength: 150 # If the 'code_style' ruleset property is set to 'android', the default is '100', otherwise '120'.
     ignoreBackTickedIdentifier: false
   MixedConditionOperators:
     active: true
@@ -1023,7 +1023,7 @@ ktlint:
     active: true
     autoCorrect: true
   MultiLineIfElse:
-    active: true
+    active: false
     autoCorrect: true
     indentSize: 4
   MultilineExpressionWrapping:
