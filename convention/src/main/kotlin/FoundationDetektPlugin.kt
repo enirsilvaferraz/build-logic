@@ -5,6 +5,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 internal class FoundationDetektPlugin : Plugin<Project> {
 
@@ -44,6 +45,7 @@ internal class FoundationDetektPlugin : Plugin<Project> {
 
             tasks.withType<Detekt>().configureEach {
                 jvmTarget.set("21")
+                exclude { it.file.absolutePath.contains("/build/") }
                 reports {
                     checkstyle.required.set(true)
                     html.required.set(true)
