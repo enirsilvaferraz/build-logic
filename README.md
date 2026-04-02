@@ -21,19 +21,6 @@ O objetivo é **uma única fonte de verdade** para multiplataforma, Android, Com
 
 ---
 
-## Plugins expostos (resumo)
-
-| ID (conceito)               | Classe                   | O que aplica                                                                           |
-|-----------------------------|--------------------------|----------------------------------------------------------------------------------------|
-| **foundation.project**      | `KmpProjectPlugin`       | Aplicado a projetos Kotlin Multiplataforma, concentra configurações de target.         |
-| **foundation.detekt**       | `FoundationDetektPlugin` | Aplica o Detekt no projeto raiz para que os subprojetos sejam avaliados.               |
-| **foundation.library.comp** | `LibraryComposePlugin`   | Convenções para módulos com **Compose** (compiler, recursos Android quando aplicável). |
-| **foundation.library.koin** | `LibraryKoinPlugin`      | Convenções para módulos com **Koin** (anotações / geração).                            |
-| **foundation.library.room** | `LibraryRoomPlugin`      | Convenções para módulos com **Room** no KMP.                                           |
-| **foundation.library.ktor** | `LibraryKtorPlugin`      | Convenções para módulos com **Ktor Client** no KMP.                                    |
-
----
-
 ## Decisões Arquiteturais
 
 ### Included build centralizado
