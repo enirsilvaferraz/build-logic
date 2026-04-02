@@ -36,20 +36,9 @@ Declaradas em: [FoundationDetektRuleSetProvider](src/main/kotlin/com/eferraz/pok
 
 ---
 
-## Detekt no fluxo de build (automático)
-
-O plugin **`foundation.detekt`** encadeia o Detekt a etapas comuns do Gradle — por exemplo o **`preBuild`** do app Android e a compilação ou execução do app desktop (e fluxos relacionados ao iOS no umbrella); os ganchos estão em
-[`FoundationDetektPlugin.kt`](../convention/src/main/kotlin/FoundationDetektPlugin.kt).
-
-Assim, **em muitos builds o Detekt já roda automaticamente**: você não precisa lembrar de disparar a análise à mão para o código “entrar” no projeto. Desvios de **formatação, estilo e boas práticas** configurados no YAML costumam **aparecer na hora do build**, o que empurra o código a **nascer e evoluir alinhado** ao que o repositório define — em vez de só descobrir tudo depois no review.
-
-> O Detekt **avisa** (e pode falhar o build) quando algo está fora do padrão; corrigir continua sendo no editor ou com as ferramentas que você já usa. O ganho é feedback cedo e contínuo.
-
----
-
 ## Como rodar o Detekt no repositório
 
-Na **raiz do Pokedex**, o comando abaixo dispara a análise em todos os módulos que aplicam o plugin (cada um com seu próprio task `detekt`):
+Na **raiz do projeto**, o comando abaixo dispara a análise em todos os módulos que aplicam o plugin (cada um com seu próprio task `detekt`):
 
 ```bash
 ./gradlew detekt
@@ -69,29 +58,23 @@ Os relatórios (HTML, SARIF, etc.) ficam nos diretórios de build de cada módul
 
 No dia a dia, as regras e os limites do monorepo vivem nos arquivos **centralizados** em `build-logic`:
 
-- [`../analysis/detekt/detekt.yml`](../analysis/detekt/detekt.yml) — configuração principal (inclui o bloco **FoundationDetekt** das regras deste módulo).
-- [`../analysis/detekt/detekt-compose.yml`](../analysis/detekt/detekt-compose.yml) — camada extra para regras relacionadas a Compose.
+- [../analysis/detekt/detekt.yml](../analysis/detekt/detekt.yml) — configuração principal (inclui o bloco **FoundationDetekt** das regras deste
+  módulo).
+- [../analysis/detekt/detekt-compose.yml](../analysis/detekt/detekt-compose.yml) — camada extra para regras relacionadas a Compose.
 
 O plugin `foundation.detekt` aponta para esses dois arquivos para todos os módulos; alterações ali passam a valer no próximo `./gradlew detekt`.
-
-O Gradle do Detekt também oferece o task **`detektGenerateConfig`**: ele gera um arquivo de configuração **padrão** do Detekt **dentro do módulo** em que você executa (útil para consultar nomes de regras, estrutura do YAML ou montar um trecho novo). Exemplo:
-
-```bash
-./gradlew :domain:entity:detektGenerateConfig
-```
-
-**Atenção:** o Pokedex não usa esse arquivo gerado como fonte única — a configuração efetiva continua sendo a do `build-logic/analysis/detekt/`. Trate o resultado de `detektGenerateConfig` como referência e copie só o que fizer sentido para os YAMLs compartilhados.
 
 ---
 
 ## Baseline (`detektBaseline`)
 
-A **baseline** é um arquivo XML que lista achados já conhecidos para o Detekt **ignorar** até você corrigi-los ou limpar a lista. No projeto, o caminho está definido no plugin como `analysis/detekt-baseline.xml` **em cada módulo** que aplica o Detekt (alguns módulos já têm esse arquivo no repositório).
+A **baseline** é um arquivo XML que lista achados já conhecidos para o Detekt **ignorar** até você corrigi-los ou limpar a lista. No projeto, o
+caminho está definido no plugin como `analysis/detekt-baseline.xml` **em cada módulo** que aplica o Detekt.
 
 Para **regenerar** a baseline de um módulo (por exemplo, depois de introduzir uma regra nova e aceitar temporariamente o estado atual):
 
 ```bash
-./gradlew :caminho:do:modulo:detektBaseline
+./gradlew detektBaseline
 ```
 
 Exemplo com módulo real:
@@ -100,9 +83,8 @@ Exemplo com módulo real:
 ./gradlew :features:composeApp:detektBaseline
 ```
 
-Na raiz, `./gradlew detektBaseline` corresponde ao projeto raiz, se existir baseline configurada lá.
-
-**Boas práticas:** use baseline com critério (dívida técnica explícita), revise o diff do XML no commit e prefira corrigir o código ou afinar o `detekt.yml` em vez de só inflar a baseline.
+**Boas práticas:** use baseline com critério (dívida técnica explícita), revise o diff do XML no commit e prefira corrigir o código ou afinar o
+`detekt.yml` em vez de só inflar a baseline.
 
 ---
 
@@ -120,13 +102,7 @@ Na **raiz do repositório**:
 
 1. Criar uma classe de regra em `src/main/kotlin/com/eferraz/pokedex/detekt/rules/` (seguindo o padrão das existentes).
 2. Registrar essa regra no `RuleSet` dentro de `FoundationDetektRuleSetProvider`.
-3. Documentar no `detekt.yml` (nome da regra, parâmetros, `active`, etc.) e, se precisar, atualizar `config.excludes` para o conjunto **FoundationDetekt**.
+3. Documentar no `detekt.yml` (nome da regra, parâmetros, `active`, etc.) e, se precisar, atualizar `config.excludes` para o conjunto *
+   *FoundationDetekt**.
 4. Adicionar testes em `src/test/kotlin/` com a API de testes do Detekt (`dev.detekt.test`), para o comportamento não regredir.
 
----
-
-## Onde ler mais
-
-- [`../README.md`](../README.md) — visão geral do `build-logic` e dos plugins Gradle.
-- [`FoundationDetektPlugin.kt`](../convention/src/main/kotlin/FoundationDetektPlugin.kt) — ponto em que as regras entram como dependência do task
-  Detekt.
