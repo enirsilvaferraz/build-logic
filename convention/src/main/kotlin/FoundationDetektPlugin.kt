@@ -3,7 +3,9 @@ import dev.detekt.gradle.Detekt
 import dev.detekt.gradle.extensions.DetektExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.Task
 import org.gradle.kotlin.dsl.apply
+import org.gradle.kotlin.dsl.named
 import org.gradle.kotlin.dsl.withType
 
 internal class FoundationDetektPlugin : Plugin<Project> {
@@ -65,5 +67,60 @@ internal class FoundationDetektPlugin : Plugin<Project> {
                 }
             }
         }
+
+        if (target === target.rootProject) {
+            val root = target
+            root.gradle.projectsEvaluated {
+                root.subprojects.forEach { subproject ->
+                    wireDetektGates(subproject, root)
+                }
+            }
+        }
+    }
+
+    private fun wireDetektGates(project: Project, root: Project) {
+
+        fun Task.dependOnAllProjectDetekt() {
+            dependsOn(root.tasks.named("detekt"))
+            root.subprojects.forEach { sub ->
+                sub.tasks.findByName("detekt")?.let { dependsOn(it) }
+            }
+        }
+
+        with(project) {
+            when {
+                pluginManager.hasPlugin("com.android.application") ->
+                    tasks.named("preBuild").configure { dependOnAllProjectDetekt() }
+                path == DESKTOP_APP_PATH -> {
+                    tasks.named("compileKotlin").configure { dependOnAllProjectDetekt() }
+                    tasks.matching { it.name in DESKTOP_ENTRY_TASKS }.configureEach { dependOnAllProjectDetekt() }
+                }
+                path == UMBRELLA_APP_PATH ->
+                    tasks.matching { it.name in IOS_XCODE_EMBED_TASKS }.configureEach { dependOnAllProjectDetekt() }
+            }
+        }
+    }
+
+    private companion object {
+
+        const val DESKTOP_APP_PATH = ":apps:desktopApp"
+        const val UMBRELLA_APP_PATH = ":apps:umbrellaApp"
+
+        val DESKTOP_ENTRY_TASKS = setOf(
+            "run",
+            "runDistributable",
+            "runRelease",
+            "runReleaseDistributable",
+            "hotRun",
+            "hotRunAsync",
+            "hotDev",
+            "hotDevAsync",
+            "runHot",
+        )
+
+        val IOS_XCODE_EMBED_TASKS = setOf(
+            "embedAndSignAppleFrameworkForXcode",
+            "embedSwiftExportForXcode",
+        )
     }
 }
