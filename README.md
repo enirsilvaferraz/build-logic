@@ -1,4 +1,4 @@
-# `build-logic` — convenções Gradle
+# Composite Build (`build-logic`)
 
 `build-logic` é um **Composite Build** que concentra **plugins Kotlin DSL** reutilizados pelos módulos de projetos KMP.
 O objetivo é **uma única fonte de verdade** para multiplataforma, Android, Compose, Koin, Room e Ktor — em vez de copiar blocos `plugins { }` e
