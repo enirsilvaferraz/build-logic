@@ -28,7 +28,7 @@ Compose:
   LambdaParameterInRestartableEffect:
     active: true
   Material2:
-    active: false
+    active: true
   ModifierClickableOrder:
     active: true
   ModifierComposed:
