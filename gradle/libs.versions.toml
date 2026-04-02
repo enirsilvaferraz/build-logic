@@ -127,9 +127,13 @@ gradle-plugin-room = { group = "androidx.room", name = "room-gradle-plugin", ver
 gradle-plugin-koin = { group = "io.insert-koin", name = "koin-gradle-plugin", version.ref = "koin-bom" }
 gradle-plugin-detekt = { group = "dev.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
 detekt-api = { group = "dev.detekt", name = "detekt-api", version.ref = "detekt" }
+detekt-test = { group = "dev.detekt", name = "detekt-test", version.ref = "detekt" }
 detekt-rules-ktlint-wrapper = { group = "dev.detekt", name = "detekt-rules-ktlint-wrapper", version.ref = "detekt" }
+detekt-ktlint-repackage = { group = "dev.detekt", name = "ktlint-repackage", version.ref = "detekt" }
 nlopez-compose-rules-detekt = { group = "io.nlopez.compose.rules", name = "detekt", version.ref = "compose-rules-detekt" }
 nlopez-compose-rules-ktlint = { group = "io.nlopez.compose.rules", name = "ktlint", version.ref = "compose-rules-detekt" }
+
+foundation-detekt-rules = { group = "com.eferraz.buildlogic", name = "detekt-rules", version = "1.0.0-SNAPSHOT" }
 
 [bundles]
 
