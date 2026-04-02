@@ -1,71 +1,52 @@
 # `build-logic` — convenções Gradle
 
-`build-logic` é um **included build** (`includeBuild("build-logic")` no `settings.gradle.kts` da raiz) que concentra **plugins Kotlin DSL** reutilizados pelos módulos do Pokedex. O objetivo é **uma única fonte de verdade** para multiplataforma, Android, Compose, Koin, Room e Ktor — em vez de copiar blocos `plugins { }` e `kotlin { }` em cada `build.gradle.kts`.
+`build-logic` é um **Composite Build** que concentra **plugins Kotlin DSL** reutilizados pelos módulos de projetos KMP.
+O objetivo é **uma única fonte de verdade** para multiplataforma, Android, Compose, Koin, Room e Ktor — em vez de copiar blocos `plugins { }` e
+`kotlin { }` em cada `build.gradle.kts`.
 
 ---
 
 ## Estrutura
 
-| Projeto | Função |
-|---------|--------|
-| **`:convention`** | Implementa os plugins publicados em `gradlePlugin { }` e depende de `compileOnly` dos plugins Android, Kotlin, Compose e Room para **compilar** contra as APIs corretas. |
+| Projeto             | Função                                                | README                                           |
+|---------------------|-------------------------------------------------------|--------------------------------------------------|
+| **`:convention`**   | Biblioteca de convenções de plugins.                  | [convention/README.md](convention/README.md)     |
+| **`:detekt-rules`** | Biblioteca com regras Detekt próprias e customizadas. | [detekt-rules/README.md](detekt-rules/README.md) |
 
-O catálogo de versões (`libs`) continua na raiz em `build-logic/gradle/libs.versions.toml` (referenciado pelo `dependencyResolutionManagement`); os plugins aqui **consomem** esse catálogo via accessors.
+| Pastas            | Função                                                  |
+|-------------------|---------------------------------------------------------|
+| **`analysis`**    | Concentra as regras do Detekt.                          |
+| **`gradle`**      | Concentra o catalogo de versões (`libs.versions.toml`). |
+| **`ide-condigs`** | Concentra configurações da IDE (dicionário e outros) .  |
 
 ---
 
 ## Plugins expostos (resumo)
 
-| ID (conceito) | Classe | O que aplica |
-|---------------|--------|----------------|
-| **foundation.project** | `KmpProjectPlugin` | Kotlin Multiplatform, `explicitApi`, JVM, iOS (`iosArm64`, `iosSimulatorArm64`) com **framework** por módulo, dependências comuns de teste. |
-| **foundation.library.comp** | `LibraryComposePlugin` | Biblioteca KMP com **Compose** (compiler, recursos Android quando aplicável). |
-| **foundation.library.koin** | `LibraryKoinPlugin` | Convenções para módulos com **Koin** (anotações / geração). |
-| **foundation.library.room** | `LibraryRoomPlugin` | Convenções **Room** no KMP. |
-| **foundation.library.ktor** | `LibraryKtorPlugin` | Convenções **Ktor Client** no KMP. |
-
-Os IDs exatos vêm de `libs.plugins.foundation.*` no version catalog — ver [`convention/build.gradle.kts`](convention/build.gradle.kts) para o mapeamento `id` → `implementationClass`.
-
----
-
-## Módulos relacionados
-
-```mermaid
-flowchart TB
-    BL[build-logic convention]
-    ROOT[Projeto Pokedex raiz]
-    KMP[Módulos KMP core]
-    APPS[apps / features]
-
-    ROOT --> BL
-    BL -. plugins .-> KMP
-    BL -. plugins .-> APPS
-
-    classDef logicModule fill:#f0f0f0,stroke:#666,color:#222
-    class BL logicModule
-```
+| ID (conceito)               | Classe                   | O que aplica                                                                           |
+|-----------------------------|--------------------------|----------------------------------------------------------------------------------------|
+| **foundation.project**      | `KmpProjectPlugin`       | Aplicado a projetos Kotlin Multiplataforma, concentra configurações de target.         |
+| **foundation.detekt**       | `FoundationDetektPlugin` | Aplica o Detekt no projeto raiz para que os subprojetos sejam avaliados.               |
+| **foundation.library.comp** | `LibraryComposePlugin`   | Convenções para módulos com **Compose** (compiler, recursos Android quando aplicável). |
+| **foundation.library.koin** | `LibraryKoinPlugin`      | Convenções para módulos com **Koin** (anotações / geração).                            |
+| **foundation.library.room** | `LibraryRoomPlugin`      | Convenções para módulos com **Room** no KMP.                                           |
+| **foundation.library.ktor** | `LibraryKtorPlugin`      | Convenções para módulos com **Ktor Client** no KMP.                                    |
 
 ---
 
-## Decisões que importam
+## Decisões Arquiteturais
 
 ### Included build isolado
 
-Mudanças em convenções **recompilam** só o `build-logic`, sem poluir o código de produto — e os módulos aplicam `alias(libs.plugins.foundation.*)` de forma uniforme.
+Mudanças em convenções **recompilam** só o `build-logic`, sem poluir o código de produto — e os módulos aplicam `alias(libs.plugins.foundation.*)` de
+forma uniforme.
 
-### `compileOnly` nos plugins Gradle
+### Included build centralizado
 
-Os plugins referenciam as APIs dos plugins externos em **compileOnly** para não arrastar dependências desnecessárias para o classpath dos módulos de aplicação.
+Os plugins centralizam todas as informações necessárias para configurar o gradle dos submódulos, de forma a evitar repetições desnecessárias de
+configuração.
 
-### KMP alinhado ao produto
+### Dependencias atualizadas
 
-`KmpProjectPlugin` fixa alvos **jvm** + **iOS** e opções como `-Xexpect-actual-classes`, alinhado ao que o Pokedex precisa para compartilhar código entre Android, Desktop e iOS.
+O Catálogo é centralizado, de forma a compartilhar a atualização das bibliotecas de terceiros para todos os projetos dependentes do `build-logic`.
 
----
-
-## Ligações úteis
-
-| Documento | Conteúdo |
-|-----------|----------|
-| [README raiz](../README.md) | Arquitetura do app e como compilar. |
-| [`settings.gradle.kts`](../settings.gradle.kts) | `includeBuild("build-logic")` e estrutura de módulos. |
