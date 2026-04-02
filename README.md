@@ -36,17 +36,12 @@ O objetivo é **uma única fonte de verdade** para multiplataforma, Android, Com
 
 ## Decisões Arquiteturais
 
-### Included build isolado
-
-Mudanças em convenções **recompilam** só o `build-logic`, sem poluir o código de produto — e os módulos aplicam `alias(libs.plugins.foundation.*)` de
-forma uniforme.
-
 ### Included build centralizado
 
-Os plugins centralizam todas as informações necessárias para configurar o gradle dos submódulos, de forma a evitar repetições desnecessárias de
+Os plugins centralizam todas as informações necessárias para configurar o gradle dos submódulos, de forma, a evitar repetições desnecessárias de
 configuração.
 
 ### Dependencias atualizadas
 
-O Catálogo é centralizado, de forma a compartilhar a atualização das bibliotecas de terceiros para todos os projetos dependentes do `build-logic`.
+O Catálogo é centralizado, de forma, a compartilhar a atualização das bibliotecas de terceiros para todos os projetos dependentes do `build-logic`.
 
