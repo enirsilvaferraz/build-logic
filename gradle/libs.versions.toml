@@ -19,8 +19,8 @@ kotlinx-serialization = "1.10.0"
 ksp = "2.3.3"
 ktor = "3.4.1"
 androidx-paging = "3.4.2"
-room = "2.8.4"
-sqlite = "2.6.2"
+room3 = "3.0.0-alpha03"
+sqlite = "2.7.0-alpha03"
 uiTooling = "1.10.6"
 navigation3 = "1.1.0-beta01"
 compose-adaptive = "1.3.0-alpha06"
@@ -79,9 +79,9 @@ paging-common = { group = "androidx.paging", name = "paging-common", version.ref
 paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "androidx-paging" }
 androidx-paging-testing = { group = "androidx.paging", name = "paging-testing", version.ref = "androidx-paging" }
 
-# Room
-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+# Room 3
+room3-runtime = { group = "androidx.room3", name = "room3-runtime", version.ref = "room3" }
+room3-compiler = { group = "androidx.room3", name = "room3-compiler", version.ref = "room3" }
 room-sqlite-bundled = { group = "androidx.sqlite", name = "sqlite-bundled", version.ref = "sqlite" }
 
 # Logging
@@ -123,7 +123,7 @@ datatable-material3 = { group = "com.seanproctor", name = "datatable-material3",
 gradle-plugin-android = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 gradle-plugin-compose = { group = "org.jetbrains.compose", name = "org.jetbrains.compose.gradle.plugin", version.ref = "cmp" }
 gradle-plugin-kotlin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
-gradle-plugin-room = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "room" }
+gradle-plugin-room = { group = "androidx.room3", name = "room3-gradle-plugin", version.ref = "room3" }
 gradle-plugin-koin = { group = "io.insert-koin", name = "koin-gradle-plugin", version.ref = "koin-bom" }
 gradle-plugin-detekt = { group = "dev.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
 detekt-api = { group = "dev.detekt", name = "detekt-api", version.ref = "detekt" }
@@ -191,13 +191,13 @@ koin-common-test = [
     "koin-test"
 ]
 
-# Room
+# Room 3
 room-common = [
-    "room-runtime",
+    "room3-runtime",
     "room-sqlite-bundled"
 ]
 room-common-compiler = [
-    "room-compiler"
+    "room3-compiler"
 ]
 
 # Compose
@@ -231,7 +231,7 @@ kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref 
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-room = { id = "androidx.room", version.ref = "room" }
+room = { id = "androidx.room3", version.ref = "room3" }
 koin-compiler = { id = "io.insert-koin.compiler.plugin", version.ref = "koin-plugin" }
 detekt = { id = "dev.detekt", version.ref = "detekt" }
 
