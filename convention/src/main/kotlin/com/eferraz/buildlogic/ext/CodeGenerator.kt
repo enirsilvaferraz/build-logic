@@ -6,79 +6,62 @@ import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.invoke
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import java.util.Properties
+import org.jetbrains.kotlin.konan.properties.loadProperties
 
-/**
- * Configura a geração do arquivo TokenConfig.kt para uso em commonMain
- * 
- * @param fileName Nome do arquivo e objeto a ser gerado (ex: "TokenConfig")
- * @param packageName O pacote onde o TokenConfig será gerado (ex: "com.eferraz.network")
- * @param properties Lista de nomes de propriedades no local.properties (ex: listOf("BRAPI_TOKEN", "API_KEY"))
- */
-fun Project.generateConstants(
-    fileName: String,
-    packageName: String,
-    properties: List<String>,
+fun Project.generateRuntimeConfigFromLocalProperties(
+    packageName: String = "com.eferraz.entities.runtime",
 ): TaskProvider<*> {
-    
-    // Define o caminho de saída
-    val finalOutputPath = packageName.replace(".", "/")
-    val outputFile = layout.buildDirectory.file("generated/kotlin/$finalOutputPath/$fileName.kt")
-    
-    // Gera a task de geração do TokenConfig
-    val codeGeneratorTask = tasks.register("codeGeneratorTask") {
+
+    val outputFile = layout.buildDirectory.file(
+        "generated/kotlin/${packageName.replace(".", "/")}/RuntimeConfig.kt",
+    )
+
+    val codeGeneratorTask = tasks.register("generateRuntimeConfig") {
 
         val localPropertiesFile = rootProject.file("local.properties")
 
         inputs.file(localPropertiesFile).optional()
         outputs.file(outputFile)
-        
+
         doLast {
 
-            // Lê o local.properties dentro da task para garantir que está atualizado
-            val localProperties = Properties()
-            if (localPropertiesFile.exists()) {
-                localPropertiesFile.inputStream().use {
-                    localProperties.load(it)
+            val localProperties = loadProperties(localPropertiesFile.path)
+
+            val constantsBody = localProperties.entries
+                .joinToString("\n") { (key, value) ->
+
+                    val (kotlinType, kotlinLiteral) = inferTypedLiteral(value.toString())
+                    val rawKey = key.toString().toUpperSnakeConstantName()
+
+                    "    public const val $rawKey: $kotlinType = $kotlinLiteral"
                 }
-            }
-            
-            // Gera as constantes para cada propriedade
-            val constants = properties.joinToString("\n") { prop ->
-                val value = localProperties.getProperty(prop, "")
-                "    const val $prop = \"$value\""
-            }
 
             val file = outputFile.get().asFile
             file.parentFile.mkdirs()
-            
-            // Gera o conteúdo do arquivo
-            val fileContent = buildString {
-                appendLine("package $packageName")
-                appendLine()
-                appendLine("internal object $fileName {")
-                appendLine(constants)
-                appendLine("}")
-            }
-            
-            file.writeText(fileContent)
+            file.writeText(
+                buildString {
+                    appendLine("package $packageName")
+                    appendLine()
+                    appendLine("public object RuntimeConfig {")
+                    append(constantsBody)
+                    appendLine()
+                    appendLine("}")
+                },
+            )
         }
     }
-    
-    // Configura para executar antes de todas as compilações do Kotlin
+
     tasks.withType(KotlinCompile::class.java).configureEach {
         dependsOn(codeGeneratorTask)
     }
-    
-    // Também configura para tasks de metadata (compatibilidade)
-    tasks.matching { 
+
+    tasks.matching {
         (it.name.contains("compile") || it.name.startsWith("ksp")) &&
-        (it.name.contains("Kotlin") || it.name.contains("Metadata"))
+                (it.name.contains("Kotlin") || it.name.contains("Metadata"))
     }.configureEach {
         dependsOn(codeGeneratorTask)
     }
-    
-    // Adiciona o diretório gerado ao sourceSets
+
     extensions.configure<KotlinMultiplatformExtension> {
         sourceSets {
             commonMain {
@@ -86,7 +69,32 @@ fun Project.generateConstants(
             }
         }
     }
-    
+
     return codeGeneratorTask
 }
 
+private fun inferTypedLiteral(rawValue: String): Pair<String, String> {
+
+    val s = rawValue.trim()
+
+    s.toBooleanStrictOrNull()?.let {
+        return "Boolean" to it.toString()
+    }
+
+    s.toDoubleOrNull()?.let {
+        return "Double" to it.toString()
+    }
+
+    s.toIntOrNull()?.let {
+        return "Int" to it.toString()
+    }
+
+    return "String" to "\"$s\""
+}
+
+/**
+ * Converte uma chave de `local.properties` num nome de constante em UPPER_SNAKE_CASE.
+ * `-` e `.` tratam-se como `_`; segmentos camelCase separados antes de juntar (ex.: `fooBar` → `FOO_BAR`).
+ */
+private fun String.toUpperSnakeConstantName() =
+    replace('-', '_').replace('.', '_').uppercase()
