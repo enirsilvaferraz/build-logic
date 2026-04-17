@@ -53,6 +53,7 @@ internal class KmpProjectPlugin : Plugin<Project> {
                     // project.name pode conter '-' (ex.: :design-system); identificadores Java não.
                     namespace = "com.eferraz.${project.name.replace('-', '_')}"
                     compileSdk = libs.versions.android.compileSdk.get().toInt()
+                    minSdk = libs.versions.android.minSdk.get().toInt()
                     androidResources.enable = true
                 }
 
