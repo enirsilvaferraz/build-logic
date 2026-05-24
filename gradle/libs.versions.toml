@@ -30,6 +30,7 @@ datatable-material3 = "0.12.0"
 detekt = "2.0.0-alpha.3"
 compose-rules-detekt = "0.5.8"
 stability-analyzer = "0.7.5"
+filemapper-kmp = "1.0.0"
 
 [libraries]
 
@@ -37,6 +38,8 @@ stability-analyzer = "0.7.5"
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
+filemapper-kmp = { group = "io.github.mamon-aburawi", name = "filemapper-kmp", version.ref = "filemapper-kmp" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "coroutines" }
