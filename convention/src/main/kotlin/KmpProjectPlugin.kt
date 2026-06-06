@@ -61,6 +61,7 @@ internal class KmpProjectPlugin : Plugin<Project> {
 
                     commonMain.dependencies {
                         implementation(libs.bundles.kotlin.common)
+                        implementation(libs.kermit)
                     }
 
                     commonTest.dependencies {
